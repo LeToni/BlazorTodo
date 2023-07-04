@@ -1,0 +1,31 @@
+﻿<header class="header">
+    <h1>todos</h1>
+    <TodoAdd AddItemAction="AddItem"></TodoAdd>
+</header>
+<section class="main">
+    @if (_items.Any())
+    {
+        if(_items.All(x=> x.Completed))
+        {
+            <input class="toggle-all" type="checkbox" checked="checked" />
+        }
+        else
+        {
+            <input class="toggle-all" type="checkbox"/>
+        }
+        <label @onclick="ToggleAll"></label>
+    }
+
+    <ul class="todo-list">
+        @foreach (var item in _items)
+        {
+            <Todo Item="item" RemoveAction="RemoveItem" StateHasChangedAction="ItemStateChanged"></Todo>
+        }
+    </ul>
+</section>
+<footer class="footer">
+    <span class="todo-count">
+        <strong>@(_items.Count(x => !x.Completed))</strong> @(_items.Count(x => !x.Completed) == 1 ? "item" : "Items") left
+    </span>
+    <button class="clear-completed" @onclick="ClearCompleted"> Clear completed</button>
+</footer>

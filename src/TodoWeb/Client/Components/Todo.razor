@@ -1,0 +1,12 @@
+﻿<li class="@(Item.GetClass())">
+    <div class="view">
+        <input class="toggle" type="checkbox" @bind="Item.Completed"/>
+        <label @ondblclick="ToggleEditing">@Item.Title</label>
+        <button class="destroy" @onclick="Remove"></button>
+
+        @if (Item.Editing)
+        {
+            <input class="edit" @bind="Item.Title" @onblur="ToggleEditing">
+        }
+    </div>
+</li>
